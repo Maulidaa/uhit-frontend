@@ -1,0 +1,56 @@
+.temp-marker-wrapper {
+  background: transparent;
+  border: 0;
+}
+
+.temp-marker {
+  min-width: 52px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.temp-full {
+  font-size: 12px;
+}
+
+.temp-short {
+  min-width: 46px;
+  height: 24px;
+  font-size: 11px;
+}
+
+.temp-dot {
+  min-width: 0;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 999px;
+  font-size: 0;
+}
+
+.temp-high {
+  background: #c62828;
+}
+
+.temp-medium {
+  background: #f9a825;
+}
+
+.temp-low {
+  background: #2e7d32;
+}
+
+.temp-na {
+  background: #616161;
+}
