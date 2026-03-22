@@ -91,6 +91,7 @@
 .uhi-content p {
   margin: 0;
   color: #2f4f58;
+  font-size: 0.95rem;
   line-height: 1.65;
 }
 
@@ -193,5 +194,9 @@
 
   .uhi-content {
     padding: 18px;
+  }
+
+  .uhi-content p {
+    font-size: 0.9rem;
   }
 }

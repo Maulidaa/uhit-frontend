@@ -13,10 +13,6 @@ export default function Uhi() {
                 <div className="uhi-layout">
                     <figure className="uhi-visual">
                         <img src={uhiImage} alt="Kawasan perkotaan padat dengan suhu tinggi" />
-                        <figcaption>
-                            Kawasan perkotaan cenderung menyimpan panas lebih lama dibanding area
-                            hijau.
-                        </figcaption>
                     </figure>
 
                     <article className="uhi-content">
@@ -24,12 +20,6 @@ export default function Uhi() {
                             Urban Heat Island (UHI) adalah fenomena ketika suhu area perkotaan
                             lebih tinggi dibanding wilayah sekitarnya yang lebih alami.
                         </p>
-                        <p>
-                            Kondisi ini dipicu oleh dominasi beton dan aspal, aktivitas kendaraan,
-                            serta berkurangnya ruang hijau. Dampaknya bisa terasa pada konsumsi
-                            energi, kesehatan masyarakat, dan pola cuaca lokal.
-                        </p>
-
                         <h3>Faktor Utama Penyebab UHI</h3>
                         <ul className="uhi-factor-grid">
                             <li>Pembangunan infrastruktur mengurangi area hijau</li>
