@@ -14,7 +14,7 @@ function Navbar() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/map">Map</Link></li>
           <li>Analysis</li>
-          <li>Simulation</li>
+          <li><Link to="/simulator">Simulation</Link></li>
         </ul>
 
       </div>
