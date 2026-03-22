@@ -1,5 +1,6 @@
 import "./uhi.css";
 import uhiImage from "../../assets/uhi.png";
+import uhiImageAlt from "../../assets/uhi2.png";
 
 export default function Uhi() {
     return (
@@ -11,9 +12,14 @@ export default function Uhi() {
                 </header>
 
                 <div className="uhi-layout">
-                    <figure className="uhi-visual">
-                        <img src={uhiImage} alt="Kawasan perkotaan padat dengan suhu tinggi" />
-                    </figure>
+                    <div className="uhi-visual-stack" aria-hidden="true">
+                        <figure className="uhi-visual uhi-visual-main">
+                            <img src={uhiImage} alt="Kawasan perkotaan padat dengan suhu tinggi" />
+                        </figure>
+                        <figure className="uhi-visual uhi-visual-accent">
+                            <img src={uhiImageAlt} alt="Jalan layang perkotaan di malam hari" />
+                        </figure>
+                    </div>
 
                     <article className="uhi-content">
                         <p>

@@ -44,47 +44,61 @@
 .uhi-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: 24px;
+  gap: 34px;
+  align-items: center;
+}
+
+.uhi-visual-stack {
+  position: relative;
+  width: min(520px, 100%);
+  aspect-ratio: 1.25 / 1;
+  margin: 0 auto;
+  animation: cardRise 0.7s 0.1s ease both;
 }
 
 .uhi-visual {
   margin: 0;
-  border-radius: 18px;
+  border-radius: 999px;
   overflow: hidden;
-  border: 1px solid rgba(53, 92, 102, 0.2);
+  border: 4px solid rgba(255, 255, 255, 0.85);
   background: #d9e2e7;
-  box-shadow: 0 20px 40px rgba(10, 40, 45, 0.16);
-  animation: cardRise 0.7s 0.1s ease both;
+  box-shadow: 0 18px 38px rgba(10, 40, 45, 0.18);
+  position: absolute;
 }
 
 .uhi-visual img {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 360px;
   object-fit: cover;
   transform: scale(1.01);
   transition: transform 0.5s ease;
 }
 
-.uhi-visual:hover img {
+.uhi-visual-main {
+  inset: 0 auto auto 0;
+  width: min(360px, 76%);
+  aspect-ratio: 1 / 1;
+}
+
+.uhi-visual-accent {
+  right: 2%;
+  bottom: 12%;
+  width: min(190px, 42%);
+  aspect-ratio: 1 / 1;
+  z-index: 2;
+}
+
+.uhi-visual-stack:hover .uhi-visual img {
   transform: scale(1.06);
 }
 
-.uhi-visual figcaption {
-  padding: 11px 14px;
-  background: rgba(12, 36, 44, 0.9);
-  color: #eef5f7;
-  font-size: 0.85rem;
-  line-height: 1.35;
-}
-
 .uhi-content {
-  border-radius: 18px;
-  border: 1px solid rgba(44, 92, 101, 0.22);
-  background: rgba(255, 255, 255, 0.84);
-  padding: 24px;
-  box-shadow: 0 12px 28px rgba(21, 51, 59, 0.11);
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
   animation: cardRise 0.7s 0.2s ease both;
 }
 
@@ -100,34 +114,45 @@
 }
 
 .uhi-content h3 {
-  margin: 20px 0 10px;
+  margin: 22px 0 12px;
   color: #163943;
   font-size: 1.05rem;
 }
 
 .uhi-factor-grid {
   list-style: none;
-  padding: 0;
+  padding: 0 0 0 6px;
   margin: 0;
   display: grid;
-  gap: 11px;
+  gap: 12px;
 }
 
 .uhi-factor-grid li {
-  border-radius: 12px;
-  padding: 12px 14px;
-  border: 1px solid rgba(67, 108, 115, 0.18);
-  background: linear-gradient(145deg, #f5fafc, #edf4f7);
+  border-radius: 0;
+  padding: 0 0 0 16px;
+  border: 0;
+  background: transparent;
   color: #1f434d;
   line-height: 1.45;
   font-weight: 500;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.uhi-factor-grid li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.44em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2f7d32, #1e6371);
 }
 
 .uhi-factor-grid li:hover {
-  transform: translateY(-2px);
-  border-color: rgba(49, 103, 113, 0.34);
-  box-shadow: 0 10px 22px rgba(25, 64, 72, 0.12);
+  transform: translateX(4px);
+  color: #103741;
 }
 
 .uhi-factor-grid li:nth-child(1) {
@@ -185,15 +210,22 @@
 
   .uhi-layout {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 18px;
   }
 
-  .uhi-visual img {
-    min-height: 270px;
+  .uhi-visual-stack {
+    width: min(420px, 100%);
+    aspect-ratio: 1.2 / 1;
   }
 
-  .uhi-content {
-    padding: 18px;
+  .uhi-visual-main {
+    width: min(300px, 74%);
+  }
+
+  .uhi-visual-accent {
+    width: min(150px, 38%);
+    right: 0;
+    bottom: 10%;
   }
 
   .uhi-content p {
