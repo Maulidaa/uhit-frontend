@@ -44,6 +44,12 @@
 	gap: 12px;
 }
 
+.dampak-grid:hover .dampak-card:not(:hover) {
+	transform: scale(0.94);
+	opacity: 0.6;
+	filter: blur(0.2px) saturate(0.92);
+}
+
 .dampak-card {
 	border-radius: 28px;
 	border: 0;
@@ -55,7 +61,8 @@
 	gap: 12px;
 	align-items: start;
 	animation: dampakFadeUp 0.6s ease both;
-	transition: transform 0.24s ease, box-shadow 0.24s ease;
+	transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+	transition-property: transform, box-shadow, filter, opacity;
 	position: relative;
 	overflow: hidden;
 }
@@ -80,8 +87,11 @@
 }
 
 .dampak-card:hover {
-	transform: translateY(-2px) scale(1.003);
-	box-shadow: 0 20px 34px rgba(13, 65, 73, 0.19);
+	transform: translateY(-8px) scale(1.08);
+    box-shadow: 0 30px 50px rgba(10, 45, 55, 0.30);
+    filter: brightness(1.04) saturate(1.14);
+    opacity: 1;
+    z-index: 3;
 }
 
 .dampak-icon-wrap {
@@ -101,6 +111,31 @@
 	height: 100%;
 	object-fit: cover;
 	display: block;
+	transform: scale(1);
+	transition: transform 0.32s ease;
+}
+
+.dampak-card:hover .dampak-icon-wrap img {
+	transform: scale(1.12);
+}
+
+.dampak-card h3,
+.dampak-card p {
+	transition: transform 0.26s ease, color 0.26s ease;
+	transform-origin: left center;
+}
+
+.dampak-card:hover h3,
+.dampak-card:hover p {
+	transform: translateX(4px) scale(1.06);
+}
+
+.dampak-card:hover h3 {
+	color: #0f3e4a;
+}
+
+.dampak-card:hover p {
+	color: #234f59;
 }
 
 .dampak-card h3 {
@@ -131,8 +166,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.dampak-grid:hover .dampak-card,
+	.dampak-card:hover {
+		transform: none;
+		opacity: 1;
+		filter: none;
+	}
+
 	.dampak-card {
 		animation: none;
+		transition: none;
+	}
+
+	.dampak-icon-wrap img,
+	.dampak-card h3,
+	.dampak-card p {
 		transition: none;
 	}
 }
