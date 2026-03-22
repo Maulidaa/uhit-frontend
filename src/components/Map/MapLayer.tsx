@@ -1,4 +1,4 @@
-import { Marker, Popup, useMapEvents } from "react-leaflet"
+import { Marker, useMapEvents } from "react-leaflet"
 import indonesia1 from "../../data/geojson/gadm41_IDN_1.json"
 import indonesia2 from "../../data/geojson/gadm41_IDN_2.json"
 import { useCallback, useEffect, useRef, useState } from "react"
@@ -27,6 +27,8 @@ type RegionPin = {
  greenStatus: "LOW" | "MEDIUM" | "HIGH" | null
  level: "IDN_1" | "IDN_2"
 }
+
+export type RegionPinDetail = RegionPin
 
 type ViewportTrackingInfo = {
  zoom: number
@@ -198,11 +200,6 @@ function getTempClass(temp: number | null) {
  return "temp-low"
 }
 
-function formatTemp(temp: number | null) {
- if (temp == null) return "N/A"
- return `${temp.toFixed(1)}C`
-}
-
 function formatMarkerText(temp: number | null) {
  if (temp == null) return "N/A"
  return `${temp.toFixed(1)}C`
@@ -259,7 +256,11 @@ async function fetchMissingWithConcurrency(
  return updated
 }
 
-export default function MapLayer(){
+export default function MapLayer({
+ onSelectPin,
+}: {
+ onSelectPin: (pin: RegionPinDetail) => void
+}){
 
  const [pins, setPins] = useState<RegionPin[]>([])
  const [bounds, setBounds] = useState<LatLngBounds | null>(null)
@@ -388,29 +389,16 @@ export default function MapLayer(){
   <>
    <MapViewportWatcher onChange={handleMapChange} />
   {pins.filter((pin) => pin.temp != null).map((pin) => (
-    <Marker key={pin.id} position={[pin.lat, pin.lon]} icon={buildTempIcon(pin.temp)}>
-     <Popup>
-      <strong>{pin.name}</strong>
-      <br />
-    Provinsi: {pin.province}
-    <br />
-      Temp: {formatTemp(pin.temp)}
-      <br />
-      AQI (OWM 1-5): {pin.aqi ?? "N/A"}
-      <br />
-      PM2.5: {pin.pm25 == null ? "N/A" : `${pin.pm25.toFixed(2)} ug/m3`}
-      <br />
-      {pin.level === "IDN_1" && (
-       <>
-        Populasi: {pin.population == null ? "N/A" : pin.population.toLocaleString("id-ID")}
-        <br />
-        Wilayah Hijau: {pin.greenPercent == null ? "N/A" : `${pin.greenPercent.toFixed(1)}%`} ({pin.greenStatus ?? "N/A"})
-        <br />
-       </>
-      )}
-    {/* Level: {pin.temp == null ? "NO DATA" : calculateUHI(pin.temp)} */}
-     </Popup>
-    </Marker>
+    <Marker
+     key={pin.id}
+     position={[pin.lat, pin.lon]}
+     icon={buildTempIcon(pin.temp)}
+     eventHandlers={{
+      click: () => {
+       onSelectPin(pin)
+      },
+     }}
+    />
    ))}
   </>
  )

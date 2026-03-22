@@ -1,0 +1,114 @@
+.solusi-section {
+  padding: 76px 24px 86px;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(58, 145, 107, 0.12), transparent 44%),
+    radial-gradient(circle at 90% 82%, rgba(88, 119, 225, 0.12), transparent 40%),
+    linear-gradient(180deg, #f8fbfc 0%, #eef4f8 100%);
+}
+
+.solusi-container {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.solusi-header {
+  max-width: 700px;
+  margin-bottom: 26px;
+}
+
+.solusi-eyebrow {
+  margin: 0;
+  font-size: 0.83rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #48645f;
+}
+
+.solusi-header h2 {
+  margin: 10px 0 10px;
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+  color: #0f3340;
+  line-height: 1.2;
+}
+
+.solusi-header p {
+  margin: 0;
+  color: #38535d;
+  line-height: 1.6;
+}
+
+.solusi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solusi-card {
+  border-radius: 16px;
+  border: 1px solid rgba(56, 101, 114, 0.2);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(237, 246, 250, 0.88));
+  box-shadow: 0 16px 28px rgba(16, 54, 63, 0.1);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.solusi-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(29, 109, 126, 0.34);
+  box-shadow: 0 20px 34px rgba(15, 55, 64, 0.14);
+}
+
+.solusi-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e6f4f7, #eff8fa);
+  border: 1px solid rgba(58, 111, 123, 0.2);
+  color: #146273;
+  font-size: 1.2rem;
+}
+
+.solusi-card h3 {
+  margin: 0;
+  color: #183f4b;
+  font-size: 1.04rem;
+}
+
+.solusi-card p {
+  margin: 0;
+  color: #35535c;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.solusi-closing {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(73, 122, 132, 0.2);
+  background: rgba(240, 249, 250, 0.82);
+  color: #27515b;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .solusi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .solusi-section {
+    padding: 58px 16px 64px;
+  }
+
+  .solusi-card {
+    padding: 16px;
+  }
+}

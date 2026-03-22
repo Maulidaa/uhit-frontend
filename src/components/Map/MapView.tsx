@@ -1,7 +1,12 @@
 import { MapContainer, TileLayer } from "react-leaflet"
 import MapLayer from "./MapLayer"
+import type { RegionPinDetail } from "./MapLayer"
 
-export default function MapView(){
+export default function MapView({
+ onSelectPin,
+}: {
+ onSelectPin: (pin: RegionPinDetail) => void
+}){
 
  return(
 
@@ -21,7 +26,7 @@ export default function MapView(){
  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 />
 
-<MapLayer/>
+<MapLayer onSelectPin={onSelectPin} />
 
 </MapContainer>
 

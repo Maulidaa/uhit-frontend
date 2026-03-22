@@ -1,0 +1,135 @@
+.dampak-section {
+	padding: 76px 24px;
+	background:
+		radial-gradient(circle at 8% 16%, rgba(38, 122, 84, 0.12), transparent 45%),
+		radial-gradient(circle at 88% 84%, rgba(230, 145, 57, 0.14), transparent 40%),
+		linear-gradient(180deg, #eaf2f5 0%, #f8fbfc 100%);
+}
+
+.dampak-container {
+	width: min(1120px, 100%);
+	margin: 0 auto;
+}
+
+.dampak-header {
+	max-width: 720px;
+	margin-bottom: 28px;
+}
+
+.dampak-eyebrow {
+	margin: 0;
+	font-size: 0.84rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #46625d;
+	font-weight: 700;
+}
+
+.dampak-header h2 {
+	margin: 10px 0 12px;
+	font-size: clamp(1.65rem, 2.5vw, 2.3rem);
+	color: #10323d;
+	line-height: 1.2;
+}
+
+.dampak-intro {
+	margin: 0;
+	color: #35515a;
+	line-height: 1.6;
+}
+
+.dampak-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.dampak-card {
+	border-radius: 16px;
+	border: 1px solid rgba(59, 101, 109, 0.2);
+	background: linear-gradient(165deg, rgba(255, 255, 255, 0.94), rgba(241, 247, 249, 0.88));
+	box-shadow: 0 16px 32px rgba(21, 57, 65, 0.1);
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	animation: dampakFadeUp 0.6s ease both;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dampak-card:nth-child(2) {
+	animation-delay: 0.1s;
+}
+
+.dampak-card:nth-child(3) {
+	animation-delay: 0.2s;
+}
+
+.dampak-card:hover {
+	transform: translateY(-4px);
+	border-color: rgba(40, 109, 120, 0.36);
+	box-shadow: 0 20px 34px rgba(18, 54, 62, 0.15);
+}
+
+.dampak-icon-wrap {
+	width: 44px;
+	height: 44px;
+	display: grid;
+	place-items: center;
+	border-radius: 12px;
+	color: #0f5b67;
+	background: linear-gradient(145deg, #dff2f4, #ecf8f9);
+	border: 1px solid rgba(45, 109, 118, 0.2);
+	font-size: 1.2rem;
+}
+
+.dampak-card h3 {
+	margin: 2px 0 0;
+	color: #143742;
+	font-size: 1.07rem;
+}
+
+.dampak-card p {
+	margin: 0;
+	color: #35525b;
+	line-height: 1.55;
+	font-size: 0.95rem;
+}
+
+@keyframes dampakFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.dampak-card {
+		animation: none;
+		transition: none;
+	}
+}
+
+@media (max-width: 960px) {
+	.dampak-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 700px) {
+	.dampak-section {
+		padding: 58px 16px;
+	}
+
+	.dampak-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.dampak-card {
+		padding: 16px;
+	}
+}

@@ -1,0 +1,59 @@
+.home-page {
+  background:
+    radial-gradient(circle at 14% 24%, rgba(72, 138, 117, 0.1), transparent 40%),
+    radial-gradient(circle at 88% 78%, rgba(222, 148, 70, 0.1), transparent 34%),
+    linear-gradient(180deg, #edf4f6 0%, #f4f8f9 38%, #eef5f7 74%, #e9f1f4 100%);
+}
+
+.home-page .uhi-section,
+.home-page .dampak-section,
+.home-page .solusi-section {
+  background: transparent;
+}
+
+.home-page .dampak-section,
+.home-page .solusi-section,
+.home-page .site-footer {
+  position: relative;
+}
+
+.home-page .dampak-section::before,
+.home-page .solusi-section::before,
+.home-page .site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(87, 121, 129, 0.42), transparent);
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .home-page .dampak-section::before,
+  .home-page .solusi-section::before,
+  .home-page .site-footer::before {
+    left: 14px;
+    right: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
