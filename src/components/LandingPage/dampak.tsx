@@ -1,21 +1,26 @@
 import "./dampak.css";
-import { FaCloudRain, FaHeartbeat, FaLightbulb } from "react-icons/fa";
+import cuacaImage from "../../assets/dampak/cuaca.png";
+import energiImage from "../../assets/dampak/energi.png";
+import kesehatanImage from "../../assets/dampak/kesehatan.png";
 
 const impactItems = [
     {
-        icon: FaHeartbeat,
+        image: kesehatanImage,
+        imageAlt: "Anak menggunakan masker oksigen sebagai ilustrasi dampak kesehatan",
         title: "Kesehatan Masyarakat",
         description:
             "Suhu tinggi meningkatkan risiko heat stroke, dehidrasi, dan memperburuk asma serta penyakit jantung.",
     },
     {
-        icon: FaLightbulb,
+        image: energiImage,
+        imageAlt: "Asap dari pembangkit listrik sebagai ilustrasi konsumsi energi",
         title: "Konsumsi Energi",
         description:
             "Kebutuhan pendinginan meningkat di musim panas sehingga konsumsi energi dan biaya listrik ikut naik.",
     },
     {
-        icon: FaCloudRain,
+        image: cuacaImage,
+        imageAlt: "Petir di langit sebagai ilustrasi perubahan pola cuaca lokal",
         title: "Pola Cuaca Lokal",
         description:
             "UHI memengaruhi sirkulasi angin dan curah hujan yang berpotensi mengubah iklim mikro kawasan kota.",
@@ -37,11 +42,10 @@ export default function Dampak() {
 
                 <div className="dampak-grid">
                     {impactItems.map((item) => {
-                        const Icon = item.icon;
                         return (
                             <article key={item.title} className="dampak-card">
                                 <div className="dampak-icon-wrap" aria-hidden="true">
-                                    <Icon />
+                                    <img src={item.image} alt={item.imageAlt} loading="lazy" />
                                 </div>
                                 <h3>{item.title}</h3>
                                 <p>{item.description}</p>

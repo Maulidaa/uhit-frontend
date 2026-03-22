@@ -1,27 +1,27 @@
-import { FaBus, FaBuilding, FaLeaf, FaPaintRoller } from "react-icons/fa";
+import { useState } from "react";
 import "./sulusi.css";
+import materialReflektifImage from "../../assets/solusi/matrialReflektif.png";
+import menanamPohonImage from "../../assets/solusi/menanamPohon.png";
+import transportasiUmumImage from "../../assets/solusi/transportasiUmum.png";
 
 const solutions = [
     {
-        icon: FaLeaf,
+        image: menanamPohonImage,
+        imageAlt: "Menanam pohon sebagai solusi penghijauan kota",
         title: "Penanaman Pohon dan Ruang Hijau",
         description:
             "Menambah area hijau di perkotaan membantu menurunkan suhu melalui proses evapotranspirasi.",
     },
     {
-        icon: FaPaintRoller,
+        image: materialReflektifImage,
+        imageAlt: "Bangunan modern sebagai ilustrasi penggunaan material reflektif",
         title: "Penggunaan Material Reflektif",
         description:
             "Material bangunan yang memantulkan sinar matahari dapat mengurangi penyerapan panas permukaan.",
     },
     {
-        icon: FaBuilding,
-        title: "Atap Hijau",
-        description:
-            "Penerapan atap hijau membantu menyerap panas sekaligus meningkatkan isolasi termal bangunan.",
-    },
-    {
-        icon: FaBus,
+        image: transportasiUmumImage,
+        imageAlt: "Transportasi umum sebagai solusi mobilitas ramah lingkungan",
         title: "Transportasi Ramah Lingkungan",
         description:
             "Mengurangi kendaraan pribadi dan mendorong transportasi umum menekan emisi panas perkotaan.",
@@ -29,6 +29,8 @@ const solutions = [
 ];
 
 export default function Sulusi() {
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
     return (
         <section className="solusi-section" aria-labelledby="solusi-heading">
             <div className="solusi-container">
@@ -42,16 +44,31 @@ export default function Sulusi() {
                 </header>
 
                 <div className="solusi-grid">
-                    {solutions.map((item) => {
-                        const Icon = item.icon;
+                    {solutions.map((item, index) => {
                         return (
-                            <article key={item.title} className="solusi-card">
-                                <div className="solusi-icon" aria-hidden="true">
-                                    <Icon />
+                            <button
+                                key={item.title}
+                                type="button"
+                                className={`solusi-card ${activeIndex === index ? "is-flipped" : ""}`}
+                                aria-pressed={activeIndex === index}
+                                onClick={() =>
+                                    setActiveIndex((prev) => (prev === index ? null : index))
+                                }
+                            >
+                                <div className="solusi-card-inner">
+                                    <div className="solusi-face solusi-front">
+                                        <div className="solusi-image-wrap">
+                                            <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                                        </div>
+                                        <h3>{item.title}</h3>
+                                        <p className="solusi-hint">Hover atau klik untuk detail</p>
+                                    </div>
+                                    <div className="solusi-face solusi-back">
+                                        <h3>{item.title}</h3>
+                                        <p>{item.description}</p>
+                                    </div>
                                 </div>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                            </article>
+                            </button>
                         );
                     })}
                 </div>

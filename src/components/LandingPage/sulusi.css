@@ -40,42 +40,72 @@
 
 .solusi-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .solusi-card {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  height: 310px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.solusi-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s ease;
+}
+
+.solusi-card:hover .solusi-card-inner,
+.solusi-card.is-flipped .solusi-card-inner {
+  transform: rotateY(180deg);
+}
+
+.solusi-face {
+  position: absolute;
+  inset: 0;
   border-radius: 16px;
+  backface-visibility: hidden;
   border: 1px solid rgba(56, 101, 114, 0.2);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(237, 246, 250, 0.88));
   box-shadow: 0 16px 28px rgba(16, 54, 63, 0.1);
-  padding: 18px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.solusi-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(29, 109, 126, 0.34);
-  box-shadow: 0 20px 34px rgba(15, 55, 64, 0.14);
+.solusi-front {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(237, 246, 250, 0.88));
 }
 
-.solusi-icon {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
+.solusi-back {
+  background: linear-gradient(150deg, rgba(24, 71, 82, 0.97), rgba(21, 93, 92, 0.95));
+  color: #e9f6f7;
+  transform: rotateY(180deg);
+  justify-content: center;
+}
+
+.solusi-image-wrap {
+  width: 100%;
+  height: 172px;
   border-radius: 12px;
-  background: linear-gradient(145deg, #e6f4f7, #eff8fa);
-  border: 1px solid rgba(58, 111, 123, 0.2);
-  color: #146273;
-  font-size: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(62, 104, 120, 0.2);
+}
+
+.solusi-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .solusi-card h3 {
-  margin: 0;
+  margin: 12px 0 6px;
   color: #183f4b;
   font-size: 1.04rem;
 }
@@ -85,6 +115,21 @@
   color: #35535c;
   line-height: 1.55;
   font-size: 0.95rem;
+}
+
+.solusi-hint {
+  margin-top: auto;
+  font-size: 0.8rem;
+  color: #50717a;
+}
+
+.solusi-back h3 {
+  color: #f2fcfd;
+  margin: 0 0 8px;
+}
+
+.solusi-back p {
+  color: #d8eff2;
 }
 
 .solusi-closing {
@@ -99,7 +144,7 @@
 
 @media (max-width: 900px) {
   .solusi-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -108,7 +153,15 @@
     padding: 58px 16px 64px;
   }
 
+  .solusi-grid {
+    grid-template-columns: 1fr;
+  }
+
   .solusi-card {
-    padding: 16px;
+    height: 300px;
+  }
+
+  .solusi-image-wrap {
+    height: 170px;
   }
 }
