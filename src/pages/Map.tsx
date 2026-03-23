@@ -151,32 +151,12 @@ function Map() {
           <div className="map-hero-main">
             <span className="map-hero-kicker">Urban Heat Explorer</span>
             <h1>Petakan suhu dan kualitas udara secara interaktif</h1>
-            <p>
-              Zoom dari level provinsi ke kota, lalu klik marker untuk detail
-              suhu, AQI, populasi, dan wilayah hijau.
-            </p>
+            <p>Zoom untuk lebih detail, klik marker untuk detail suhu, AQI, populasi, dan wilayah hijau.</p>
           </div>
-          <ul className="map-hero-metrics" aria-hidden="true">
-            <li>
-              <span>Mode</span>
-              <strong>Live Monitoring</strong>
-            </li>
-            <li>
-              <span>Layer</span>
-              <strong>Suhu, AQI, Vegetasi</strong>
-            </li>
-            <li>
-              <span>Interaksi</span>
-              <strong>Klik marker untuk detail</strong>
-            </li>
-          </ul>
         </section>
 
         <section className={`map-layout ${hasDetail ? "has-detail" : ""}`}>
           <section className="map-card">
-            <div className="map-floating-note" aria-hidden="true">
-              <strong>Tip:</strong> klik marker suhu untuk membuka detail lokasi.
-            </div>
             <div className="map-legend" aria-hidden="true">
               <span className="legend-title">Legenda Suhu</span>
               <span className="legend-chip legend-low">Rendah</span>
