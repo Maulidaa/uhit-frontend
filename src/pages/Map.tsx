@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar/Navbar";
 import MapView from "../components/Map/MapView";
 import type { RegionPinDetail } from "../components/Map/MapLayer";
+import { FaTimes } from "react-icons/fa";
 import { useMemo, useState } from "react";
 import "./Map.css";
 
@@ -35,26 +36,6 @@ function getAirText(aqi: number | null) {
     return "Kualitas udara sedang";
   }
   return "Kualitas udara kurang baik";
-}
-
-function getGreenBadgeClass(status: RegionPinDetail["greenStatus"]) {
-  if (status === "HIGH") {
-    return "green-high";
-  }
-  if (status === "MEDIUM") {
-    return "green-medium";
-  }
-  if (status === "LOW") {
-    return "green-low";
-  }
-  return "green-na";
-}
-
-function getGreenStatusText(pin: RegionPinDetail) {
-  if (pin.greenPercent == null) {
-    return "Data wilayah hijau belum tersedia";
-  }
-  return `Wilayah hijau ${pin.greenPercent.toFixed(1)}% (${pin.greenStatus ?? "N/A"})`;
 }
 
 function buildLocationInsight(pin: RegionPinDetail) {
@@ -119,14 +100,6 @@ function Map() {
 
     return [
       {
-        label: "Koordinat",
-        value: `${selectedPin.lat.toFixed(4)}, ${selectedPin.lon.toFixed(4)}`,
-      },
-      {
-        label: "Status Udara",
-        value: getAirText(selectedPin.aqi),
-      },
-      {
         label: "Populasi",
         value:
           selectedPin.population == null
@@ -173,31 +146,29 @@ function Map() {
                 <button
                   type="button"
                   className="detail-close-btn"
+                  aria-label="Tutup detail lokasi"
                   onClick={() => setSelectedPin(null)}
                 >
-                  Tutup
+                  <FaTimes aria-hidden="true" />
                 </button>
               </div>
 
-              <>
+              <div className="detail-body">
                 <div className="detail-head">
                   <div className="detail-header-band">
-                    <div>
+                    {/* <div>
                       <span className="detail-chip">Selected Location</span>
                       <h3>{selectedPin.name}</h3>
                       <p>{selectedPin.province}</p>
                     </div>
-                    <div className="detail-temp-pill" aria-label="Suhu utama lokasi">
+                    {/* <div className="detail-temp-pill" aria-label="Suhu utama lokasi">
                       {formatNullableNumber(selectedPin.temp, " C")}
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="detail-tags">
                     <span className={`air-badge ${getAirBadgeClass(selectedPin.aqi)}`}>
                       {getAirText(selectedPin.aqi)}
-                    </span>
-                    <span className={`green-badge ${getGreenBadgeClass(selectedPin.greenStatus)}`}>
-                      {getGreenStatusText(selectedPin)}
                     </span>
                   </div>
 
@@ -226,7 +197,7 @@ function Map() {
                     </article>
                   ))}
                 </div>
-              </>
+              </div>
             </aside>
           )}
         </section>
