@@ -202,7 +202,7 @@ function getTempClass(temp: number | null) {
 
 function formatMarkerText(temp: number | null) {
  if (temp == null) return "N/A"
- return `${temp.toFixed(1)}C`
+ return `${temp.toFixed(1)}°`
 }
 
 function buildTempIcon(temp: number | null) {
@@ -211,7 +211,7 @@ function buildTempIcon(temp: number | null) {
 
  return divIcon({
   className: "temp-marker-wrapper",
-  html: `<div class="temp-marker temp-full ${tempClass}">${text}</div>`,
+  html: `<div class="temp-marker temp-full ${tempClass}"><span class="temp-value">${text}</span></div>`,
   iconSize: [60, 28],
   iconAnchor: [30, 14],
   popupAnchor: [0, -16],

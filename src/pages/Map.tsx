@@ -37,9 +37,80 @@ function getAirText(aqi: number | null) {
   return "Kualitas udara kurang baik";
 }
 
+function getGreenBadgeClass(status: RegionPinDetail["greenStatus"]) {
+  if (status === "HIGH") {
+    return "green-high";
+  }
+  if (status === "MEDIUM") {
+    return "green-medium";
+  }
+  if (status === "LOW") {
+    return "green-low";
+  }
+  return "green-na";
+}
+
+function getGreenStatusText(pin: RegionPinDetail) {
+  if (pin.greenPercent == null) {
+    return "Data wilayah hijau belum tersedia";
+  }
+  return `Wilayah hijau ${pin.greenPercent.toFixed(1)}% (${pin.greenStatus ?? "N/A"})`;
+}
+
+function buildLocationInsight(pin: RegionPinDetail) {
+  const temp = pin.temp;
+  const green = pin.greenPercent;
+
+  if (temp == null && green == null) {
+    return "Data lingkungan masih terbatas untuk lokasi ini. Silakan cek wilayah terdekat.";
+  }
+
+  if (temp != null && temp >= 32 && (green == null || green < 20)) {
+    return "Suhu cukup tinggi dengan tutupan hijau rendah. Prioritaskan penanaman pohon dan koridor teduh.";
+  }
+
+  if (temp != null && temp >= 30) {
+    return "Area ini cenderung panas pada pengukuran saat ini. Intervensi ruang terbuka dan material reflektif bisa membantu.";
+  }
+
+  if (green != null && green >= 30) {
+    return "Tutupan hijau relatif baik, membantu menahan kenaikan suhu permukaan di area ini.";
+  }
+
+  return "Kondisi lokasi berada pada tingkat sedang. Pantau tren suhu dan kualitas udara secara berkala.";
+}
+
 function Map() {
   const [selectedPin, setSelectedPin] = useState<RegionPinDetail | null>(null);
   const hasDetail = selectedPin !== null;
+
+  const insightText = useMemo(() => {
+    if (!selectedPin) {
+      return "";
+    }
+    return buildLocationInsight(selectedPin);
+  }, [selectedPin]);
+
+  const quickStats = useMemo(() => {
+    if (!selectedPin) {
+      return [];
+    }
+
+    return [
+      {
+        label: "Suhu",
+        value: formatNullableNumber(selectedPin.temp, " C"),
+      },
+      {
+        label: "AQI",
+        value: selectedPin.aqi == null ? "N/A" : selectedPin.aqi.toString(),
+      },
+      {
+        label: "PM2.5",
+        value: selectedPin.pm25 == null ? "N/A" : `${selectedPin.pm25.toFixed(1)} ug/m3`,
+      },
+    ];
+  }, [selectedPin]);
 
   const detailRows = useMemo(() => {
     if (!selectedPin) {
@@ -52,16 +123,8 @@ function Map() {
         value: `${selectedPin.lat.toFixed(4)}, ${selectedPin.lon.toFixed(4)}`,
       },
       {
-        label: "Suhu",
-        value: formatNullableNumber(selectedPin.temp, " C"),
-      },
-      {
-        label: "AQI (OWM 1-5)",
-        value: selectedPin.aqi == null ? "N/A" : selectedPin.aqi.toString(),
-      },
-      {
-        label: "PM2.5",
-        value: selectedPin.pm25 == null ? "N/A" : `${selectedPin.pm25.toFixed(2)} ug/m3`,
+        label: "Status Udara",
+        value: getAirText(selectedPin.aqi),
       },
       {
         label: "Populasi",
@@ -84,8 +147,42 @@ function Map() {
     <div className="map-page">
       <Navbar />
       <main className="map-content">
+        <section className="map-hero" aria-label="Map overview">
+          <div className="map-hero-main">
+            <span className="map-hero-kicker">Urban Heat Explorer</span>
+            <h1>Petakan suhu dan kualitas udara secara interaktif</h1>
+            <p>
+              Zoom dari level provinsi ke kota, lalu klik marker untuk detail
+              suhu, AQI, populasi, dan wilayah hijau.
+            </p>
+          </div>
+          <ul className="map-hero-metrics" aria-hidden="true">
+            <li>
+              <span>Mode</span>
+              <strong>Live Monitoring</strong>
+            </li>
+            <li>
+              <span>Layer</span>
+              <strong>Suhu, AQI, Vegetasi</strong>
+            </li>
+            <li>
+              <span>Interaksi</span>
+              <strong>Klik marker untuk detail</strong>
+            </li>
+          </ul>
+        </section>
+
         <section className={`map-layout ${hasDetail ? "has-detail" : ""}`}>
           <section className="map-card">
+            <div className="map-floating-note" aria-hidden="true">
+              <strong>Tip:</strong> klik marker suhu untuk membuka detail lokasi.
+            </div>
+            <div className="map-legend" aria-hidden="true">
+              <span className="legend-title">Legenda Suhu</span>
+              <span className="legend-chip legend-low">Rendah</span>
+              <span className="legend-chip legend-medium">Sedang</span>
+              <span className="legend-chip legend-high">Tinggi</span>
+            </div>
             <MapView onSelectPin={setSelectedPin} />
           </section>
 
@@ -104,13 +201,43 @@ function Map() {
 
               <>
                 <div className="detail-head">
-                  <h3>{selectedPin.name}</h3>
-                  <p>{selectedPin.province}</p>
-                  <span className={`air-badge ${getAirBadgeClass(selectedPin.aqi)}`}>
-                    {getAirText(selectedPin.aqi)}
-                  </span>
+                  <div className="detail-header-band">
+                    <div>
+                      <span className="detail-chip">Selected Location</span>
+                      <h3>{selectedPin.name}</h3>
+                      <p>{selectedPin.province}</p>
+                    </div>
+                    <div className="detail-temp-pill" aria-label="Suhu utama lokasi">
+                      {formatNullableNumber(selectedPin.temp, " C")}
+                    </div>
+                  </div>
+
+                  <div className="detail-tags">
+                    <span className={`air-badge ${getAirBadgeClass(selectedPin.aqi)}`}>
+                      {getAirText(selectedPin.aqi)}
+                    </span>
+                    <span className={`green-badge ${getGreenBadgeClass(selectedPin.greenStatus)}`}>
+                      {getGreenStatusText(selectedPin)}
+                    </span>
+                  </div>
+
+                  <p className="detail-section-title">Ringkasan Cepat</p>
+                  <div className="detail-quick-stats">
+                    {quickStats.map((item) => (
+                      <article
+                        key={item.label}
+                        className={`quick-stat-item stat-${item.label.toLowerCase().replace(".", "").replace(" ", "-")}`}
+                      >
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                      </article>
+                    ))}
+                  </div>
+
+                  <p className="detail-insight">{insightText}</p>
                 </div>
 
+                <p className="detail-section-title">Data Wilayah</p>
                 <div className="detail-grid">
                   {detailRows.map((item) => (
                     <article key={item.label} className="detail-item">

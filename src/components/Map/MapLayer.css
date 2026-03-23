@@ -5,7 +5,7 @@
 
 .temp-marker {
   min-width: 52px;
-  height: 28px;
+  height: 30px;
   padding: 0 8px;
   border-radius: 999px;
   display: inline-flex;
@@ -14,11 +14,20 @@
   font-size: 12px;
   font-weight: 700;
   color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(17, 31, 36, 0.34);
+  box-shadow: 0 4px 9px rgba(18, 31, 36, 0.26);
   white-space: nowrap;
-  transition: transform 160ms ease, opacity 160ms ease;
+  transition: transform 160ms ease, opacity 160ms ease, box-shadow 160ms ease;
   cursor: pointer;
+}
+
+.temp-marker:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(18, 31, 36, 0.28);
+}
+
+.temp-value {
+  letter-spacing: 0.01em;
 }
 
 .temp-full {
@@ -41,17 +50,17 @@
 }
 
 .temp-high {
-  background: #c62828;
+  background: linear-gradient(140deg, #d44c32, #b02130);
 }
 
 .temp-medium {
-  background: #f9a825;
+  background: linear-gradient(140deg, #f0b14e, #d88a1f);
 }
 
 .temp-low {
-  background: #2e7d32;
+  background: linear-gradient(140deg, #389a64, #1f7446);
 }
 
 .temp-na {
-  background: #616161;
+  background: linear-gradient(140deg, #7a8b90, #5f6b71);
 }
