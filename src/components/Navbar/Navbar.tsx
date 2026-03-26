@@ -40,7 +40,7 @@ function Navbar() {
             <Link to="/map" onClick={closeMenu}>Map</Link>
           </li>
           <li>
-            <span className="nav-disabled">Analysis</span>
+            <Link to="/analisis" onClick={closeMenu}>Analysis</Link>
           </li>
           <li>
             <Link to="/simulator" onClick={closeMenu}>Simulation</Link>
