@@ -124,8 +124,8 @@ export async function fetchSentinel2GreenCoverage(
         ],
       },
       output: {
-        width: 256,
-        height: 256,
+        width,
+        height,
         responses: [
           {
             identifier: "default",
