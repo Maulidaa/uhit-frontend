@@ -8,10 +8,10 @@
   display: flex;
   justify-content: center;
   z-index: 1000;
-  --nav-glass-bg: rgba(232, 244, 249, 0.14);
-  --nav-glass-bg-strong: rgba(236, 247, 251, 0.24);
-  --nav-border: rgba(226, 241, 247, 0.38);
-  --nav-text: #f5fbff;
+  --nav-glass-bg: rgba(49, 66, 75, 0.62);
+  --nav-glass-bg-strong: rgba(33, 50, 58, 0.74);
+  --nav-border: rgba(197, 227, 233, 0.32);
+  --nav-text: #e9f6f8;
 }
 
 .nav-container {
@@ -51,7 +51,7 @@
   padding: 0;
   border: 0;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -119,7 +119,7 @@
   bottom: 3px;
   height: 1.5px;
   border-radius: 999px;
-  background: rgba(243, 251, 255, 0.9);
+  background: rgba(189, 229, 214, 0.95);
   opacity: 0;
   transform: scaleX(0.6);
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -177,8 +177,8 @@
     display: inline-flex;
     margin-left: auto;
     border-radius: 10px;
-    background: rgba(236, 247, 251, 0.14);
-    border: 1px solid rgba(236, 247, 251, 0.24);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(217, 239, 245, 0.24);
   }
 
   .nav-toggle span {
@@ -217,7 +217,7 @@
     padding: 9px 0;
     border-radius: 0;
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(212, 236, 243, 0.26);
   }
 
   .nav-menu li:last-child {
