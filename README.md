@@ -1,75 +1,25 @@
-# React + TypeScript + Vite
+# Urban Heat Island Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Institusi
+Sekolah Tinggi Meteorologi Klimatologi Geofisika
 
-Currently, two official plugins are available:
+## Anggota Tim
+- Ketua: Allya Maulida
+- Anggota 1: Komang Adi Ari Jaya Kusuma
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Deskripsi Karya
+Urban Heat Island (UHI) merupakan fenomena meningkatnya suhu di wilayah perkotaan dibandingkan dengan daerah sekitarnya. Kondisi ini terjadi akibat minimnya ruang terbuka hijau, tingginya aktivitas manusia, serta dominasi permukaan beton dan aspal yang menyerap panas. Fenomena UHI menjadi isu penting karena dapat berdampak pada kesehatan masyarakat, menurunkan kualitas udara, serta mengganggu aktivitas sehari-hari.
 
-## React Compiler
+Berdasarkan permasalahan tersebut, website ini dikembangkan sebagai media edukasi dan informasi bagi masyarakat untuk memahami dampak Urban Heat Island serta pentingnya menjaga keseimbangan lingkungan. Melalui platform ini, pengguna dapat memperoleh wawasan mengenai kondisi suhu lingkungan, faktor penyebab UHI, serta solusi yang dapat dilakukan, seperti peningkatan ruang hijau dan pengurangan polusi udara.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Tujuan dari pembuatan website ini adalah untuk meningkatkan kesadaran masyarakat terhadap isu lingkungan, khususnya terkait perubahan suhu di perkotaan, serta mendorong partisipasi aktif dalam menciptakan lingkungan yang lebih sehat dan berkelanjutan. Dengan demikian, karya ini mengangkat subtema Lingkungan, sejalan dengan upaya inovatif dalam memanfaatkan teknologi untuk memberikan solusi yang bermanfaat bagi masyarakat.
 
-Note: This will impact Vite dev & build performances.
+### Fitur Utama Website
+1. **Interactive Heat Map** - Visualisasi data suhu real-time melalui peta interaktif yang menampilkan zona Urban Heat Island di berbagai wilayah Indonesia
+2. **Analysis Dashboard** - Analisis data komprehensif terhadap tren suhu, pola perubahan iklim, dan faktor-faktor penyebab UHI dengan grafik dan statistik detail
+3. **Simulator** - Alat simulasi interaktif untuk memprediksi dampak UHI berdasarkan skenario perubahan ruang hijau dan urbanisasi
+4. **Educational Content** - Informasi terstruktur tentang definisi UHI, dampak kesehatan dan lingkungan, serta solusi mitigasi yang dapat diimplementasikan
+5. **Data Visualization** - Grafik dan chart yang menampilkan tren suhu historis dan proyeksi perubahan klimatik
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Link Website
+https://uhit-di2g8qorx-maulidaas-projects.vercel.app/
