@@ -43,6 +43,14 @@ function Analisis() {
   const [activeNewsIndex, setActiveNewsIndex] = useState(0);
   const totalCards = heroNewsLinks.length;
 
+  const handlePrevNews = () => {
+    setActiveNewsIndex((prev) => (prev - 1 + totalCards) % totalCards);
+  };
+
+  const handleNextNews = () => {
+    setActiveNewsIndex((prev) => (prev + 1) % totalCards);
+  };
+
   const visibleCards = [
     (activeNewsIndex - 1 + totalCards) % totalCards,
     activeNewsIndex,
@@ -56,7 +64,7 @@ function Analisis() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveNewsIndex((prev) => (prev + 1) % totalCards);
-    }, 2200);
+    }, 4200);
 
     return () => {
       window.clearInterval(timer);
@@ -81,36 +89,54 @@ function Analisis() {
               Suhu rata-rata permukaan bumi Januari-Agustus 2025 mencapai +1,42 C ± 0,12 C di
               atas rata-rata pra-industri (1850-1900).
             </p>
-            <div className="hero-news-row">
-              {visibleCards.map(({ item, itemIndex, slot }) => (
-                item.href ? (
-                  <a
-                    key={`${item.href}-${slot}`}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`hero-news-card ${slot === 1 ? "is-active hero-news-card--center" : "hero-news-card--side"}`}
-                    onMouseEnter={() => setActiveNewsIndex(itemIndex)}
-                    onFocus={() => setActiveNewsIndex(itemIndex)}
-                  >
-                    <small>{item.label}</small>
-                    <strong>{item.title}</strong>
-                    <span className="hero-news-desc">{item.description}</span>
-                  </a>
-                ) : (
-                  <Link
-                    key={`${item.to}-${slot}`}
-                    to={item.to ?? "/analisis"}
-                    className={`hero-news-card ${slot === 1 ? "is-active hero-news-card--center" : "hero-news-card--side"}`}
-                    onMouseEnter={() => setActiveNewsIndex(itemIndex)}
-                    onFocus={() => setActiveNewsIndex(itemIndex)}
-                  >
-                    <small>{item.label}</small>
-                    <strong>{item.title}</strong>
-                    <span className="hero-news-desc">{item.description}</span>
-                  </Link>
-                )
-              ))}
+            <div className="hero-news-controls" aria-label="Navigasi ringkasan berita">
+              <button
+                type="button"
+                className="hero-news-arrow"
+                aria-label="Lihat kartu sebelumnya"
+                onClick={handlePrevNews}
+              >
+                <span className="hero-news-arrow-icon hero-news-arrow-icon--left" aria-hidden="true" />
+              </button>
+              <div className="hero-news-row">
+                {visibleCards.map(({ item, itemIndex, slot }) => (
+                  item.href ? (
+                    <a
+                      key={`${item.href}-${slot}`}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`hero-news-card ${slot === 1 ? "is-active hero-news-card--center" : "hero-news-card--side"}`}
+                      onMouseEnter={() => setActiveNewsIndex(itemIndex)}
+                      onFocus={() => setActiveNewsIndex(itemIndex)}
+                    >
+                      <small>{item.label}</small>
+                      <strong>{item.title}</strong>
+                      <span className="hero-news-desc">{item.description}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      key={`${item.to}-${slot}`}
+                      to={item.to ?? "/analisis"}
+                      className={`hero-news-card ${slot === 1 ? "is-active hero-news-card--center" : "hero-news-card--side"}`}
+                      onMouseEnter={() => setActiveNewsIndex(itemIndex)}
+                      onFocus={() => setActiveNewsIndex(itemIndex)}
+                    >
+                      <small>{item.label}</small>
+                      <strong>{item.title}</strong>
+                      <span className="hero-news-desc">{item.description}</span>
+                    </Link>
+                  )
+                ))}
+              </div>
+              <button
+                type="button"
+                className="hero-news-arrow"
+                aria-label="Lihat kartu berikutnya"
+                onClick={handleNextNews}
+              >
+                <span className="hero-news-arrow-icon hero-news-arrow-icon--right" aria-hidden="true" />
+              </button>
             </div>
           </div>
         </section>
