@@ -64,7 +64,7 @@ function Analisis() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveNewsIndex((prev) => (prev + 1) % totalCards);
-    }, 4200);
+    }, 14200);
 
     return () => {
       window.clearInterval(timer);

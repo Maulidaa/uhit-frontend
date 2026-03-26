@@ -1,11 +1,17 @@
 .navbar {
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: 12px;
+  left: 0;
+  right: 0;
   width: 100%;
   padding: 0 24px;
   display: flex;
   justify-content: center;
   z-index: 1000;
+  --nav-glass-bg: rgba(232, 244, 249, 0.14);
+  --nav-glass-bg-strong: rgba(236, 247, 251, 0.24);
+  --nav-border: rgba(226, 241, 247, 0.38);
+  --nav-text: #f5fbff;
 }
 
 .nav-container {
@@ -14,11 +20,13 @@
   justify-content: space-between;
 
   width: min(800px, 100%);
-  padding: 10px 30px;
+  padding: 10px 24px;
 
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(14px);
+  background: var(--nav-glass-bg);
+  border: 1px solid var(--nav-border);
   border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(7, 22, 31, 0.22);
 }
 
 .nav-top-row {
@@ -29,9 +37,11 @@
 }
 
 .logo {
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--nav-text);
+  white-space: nowrap;
+  letter-spacing: 0.08em;
 }
 
 .nav-toggle {
@@ -72,8 +82,9 @@
 .nav-menu {
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 24px;
   margin: 0;
+  padding: 0;
 }
 
 .nav-menu li {
@@ -83,8 +94,51 @@
 }
 
 .nav-menu a {
-  color: white;
+  color: var(--nav-text);
   text-decoration: none;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 3px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: rgba(243, 251, 255, 0.9);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  background: transparent;
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: transparent;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.nav-link.active::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .nav-disabled {
@@ -92,29 +146,39 @@
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    top: 10px;
+    padding: 0 12px;
+    z-index: 1200;
+  }
+
   .nav-container {
     flex-direction: column;
     align-items: stretch;
-    width: min(860px, 100%);
+    width: 100%;
     padding: 0;
     border-radius: 0;
     background: transparent;
+    border: 0;
+    box-shadow: none;
     backdrop-filter: none;
   }
 
   .nav-top-row {
     padding: 10px 14px;
     border-radius: 16px;
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(14px);
+    background: var(--nav-glass-bg);
+    border: 1px solid var(--nav-border);
+    box-shadow: 0 10px 22px rgba(7, 22, 31, 0.2);
   }
 
   .nav-toggle {
     display: inline-flex;
     margin-left: auto;
-    border-radius: 0;
-    background: transparent;
+    border-radius: 10px;
+    background: rgba(236, 247, 251, 0.14);
+    border: 1px solid rgba(236, 247, 251, 0.24);
   }
 
   .nav-toggle span {
@@ -122,8 +186,8 @@
   }
 
   .nav-menu {
-    align-self: flex-end;
-    width: min(72%, 270px);
+    align-self: stretch;
+    width: 100%;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -141,10 +205,11 @@
     pointer-events: auto;
     margin-top: 8px;
     padding: 8px 14px 12px;
-    border-radius: 0 0 14px 14px;
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    backdrop-filter: blur(14px);
+    background: var(--nav-glass-bg-strong);
+    border: 1px solid var(--nav-border);
+    box-shadow: 0 10px 22px rgba(7, 22, 31, 0.18);
   }
 
   .nav-menu li {
@@ -163,5 +228,20 @@
   .nav-disabled {
     display: block;
     width: 100%;
+  }
+
+  .nav-link {
+    justify-content: flex-start;
+    border-radius: 0;
+    padding: 8px 10px;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-link.active {
+    background: transparent;
+    border-color: transparent;
   }
 }
